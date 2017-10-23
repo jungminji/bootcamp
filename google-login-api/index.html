@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <!-- Specify the client ID -->
+  <meta name="google-signin-client_id" content="1020042898377-0d2bvmct8f5iv58kv7ei74asct8g3fbq.apps.googleusercontent.com">
+  <title>Google login api</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- You must include Google Platform Library to integrate Google Sign-in -->
+  <script src="https://apis.google.com/js/platform.js" async defer></script>
+</head>
+<body>
+  <div class="g-signin2" data-onsuccess="onSignIn"></div>
+  <button onclick="signOut()">Sign-out</button>
+  <p id="status"></p>
+  <p id="idtoken"></p>
+<script>
+  // To retrieve profile information for a user, use getBasicProfile() method
+  function onSignIn(googleUser) {
+    var profile = googleUser.getBasicProfile();
+    console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+    console.log('Name: ' + profile.getName());
+    console.log('Image URL: ' + profile.getImageUrl());
+    console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+    document.querySelector('#status').innerHTML = profile.getName();
+    
+    // send this id_token to your server
+    var id_token = googleUser.getAuthResponse().id_token;
+    document.querySelector('#idtoken').innerHTML = id_token;
+  }
+
+  function signOut() {
+    var auth2 = gapi.auth2.getAuthInstance();
+    auth2.signOut().then(function () {
+      console.log('User signed out.');
+      document.querySelector('#status').innerHTML = 'user signed out'
+      document.querySelector('#idtoken').innerHTML = '';
+    });
+  }
+</script>
+</body>
+</html>

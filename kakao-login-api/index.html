@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>kakao-login-api</title>
+  <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <a id="kakao-login-btn"></a>
+  <button onclick="kakaoLogout()">Logout</button>
+<script>
+  Kakao.init('7fbbdab52369df7a7e331c072683ace4');
+  Kakao.Auth.createLoginButton({
+    container: '#kakao-login-btn',
+    success: function(authObj) {
+      console.log(JSON.stringify(authObj));
+    },
+    fail: function(err) {
+      console.log(JSON.stringify(err));
+    }
+  });
+  Kakao.Auth.getStatus(function(statusObj) {
+    console.log('Login status: ')
+    console.log(statusObj)
+  })
+  function kakaoLogout () {
+    Kakao.Auth.logout(function() {
+      console.log('logout')
+    })
+  }
+</script>
+</body>
+</html>
