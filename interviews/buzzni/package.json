@@ -1,27 +1,31 @@
 {
   "name": "buzzni",
+  "description": "vue-cli webpack simple template",
   "version": "1.0.0",
-  "description": "buzzni project without frameworks. plain js",
-  "main": "index.js",
+  "author": "Jungmin Ji <fdev.jm@gmail.com>",
+  "private": true,
   "scripts": {
-    "pug": "pug -P ./src/index.pug --out ./dist",
-    "sass": "node-sass ./src/sass/ -o ./dist/css/ --sourcemap",
-    "dev": "rm -rf ./dist/* && npm run sass && npm run pug && cp -R ./src/js ./dist/js && ws"
+    "dev": "cross-env NODE_ENV=development webpack-dev-server --open --hot",
+    "build": "cross-env NODE_ENV=production webpack --progress --hide-modules"
   },
-  "author": "jungmin ji",
-  "license": "ISC",
   "dependencies": {
-    "jquery": "^3.2.1"
+    "vue": "^2.4.4",
+    "vuex": "^3.0.0"
   },
   "devDependencies": {
-    "eslint": "^4.10.0",
-    "eslint-config-airbnb": "^16.1.0",
-    "eslint-plugin-import": "^2.8.0",
-    "eslint-plugin-jsx-a11y": "^6.0.2",
-    "eslint-plugin-react": "^7.4.0",
-    "local-web-server": "^2.2.4",
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-env": "^1.6.0",
+    "babel-preset-stage-3": "^6.24.1",
+    "cross-env": "^5.0.5",
+    "css-loader": "^0.28.7",
+    "file-loader": "^1.1.4",
     "node-sass": "^4.5.3",
     "pug": "^2.0.0-rc.4",
-    "pug-cli": "^1.0.0-alpha6"
+    "sass-loader": "^6.0.6",
+    "vue-loader": "^13.0.5",
+    "vue-template-compiler": "^2.4.4",
+    "webpack": "^3.6.0",
+    "webpack-dev-server": "^2.9.1"
   }
 }
